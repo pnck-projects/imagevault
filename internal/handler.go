@@ -2,15 +2,15 @@ package internal
 
 import (
 	"github.com/pnck-projects/imagevault/database"
-	"go.mongodb.org/mongo-driver/bson/primitive"
+	"go.mongodb.org/mongo-driver/v2/bson"
 	"net/http"
 )
 
 type HandlerConfig struct {
 	db                *database.MongoDB
 	tokenType         TokenType
-	environmentId     primitive.ObjectID
-	tokenId           primitive.ObjectID
+	environmentId     bson.ObjectID
+	tokenId           bson.ObjectID
 	tokenDescription  string
 	routeParams       []string
 	environmentSecret []byte
@@ -38,11 +38,11 @@ func (h *HandlerConfig) SetTokenType(t TokenType) {
 	h.tokenType = t
 }
 
-func (h *HandlerConfig) GetEnvironmentId() primitive.ObjectID {
+func (h *HandlerConfig) GetEnvironmentId() bson.ObjectID {
 	return h.environmentId
 }
 
-func (h *HandlerConfig) SetEnvironmentId(id primitive.ObjectID) {
+func (h *HandlerConfig) SetEnvironmentId(id bson.ObjectID) {
 	h.environmentId = id
 }
 
@@ -54,11 +54,11 @@ func (h *HandlerConfig) SetTokenDescription(description string) {
 	h.tokenDescription = description
 }
 
-func (h *HandlerConfig) GetTokenId() primitive.ObjectID {
+func (h *HandlerConfig) GetTokenId() bson.ObjectID {
 	return h.tokenId
 }
 
-func (h *HandlerConfig) SetTokenId(tokenId primitive.ObjectID) {
+func (h *HandlerConfig) SetTokenId(tokenId bson.ObjectID) {
 	h.tokenId = tokenId
 }
 

@@ -2,10 +2,10 @@ package database
 
 import (
 	"context"
-	"go.mongodb.org/mongo-driver/bson"
-	"go.mongodb.org/mongo-driver/mongo"
-	"go.mongodb.org/mongo-driver/mongo/options"
-	"go.mongodb.org/mongo-driver/x/mongo/driver/connstring"
+	"go.mongodb.org/mongo-driver/v2/bson"
+	"go.mongodb.org/mongo-driver/v2/mongo"
+	"go.mongodb.org/mongo-driver/v2/mongo/options"
+	"go.mongodb.org/mongo-driver/v2/x/mongo/driver/connstring"
 	"log"
 	"os"
 )
@@ -41,7 +41,7 @@ func (m *MongoDB) connect(connectionUri string) {
 	}
 
 	opts := options.Client().ApplyURI(connectionUri)
-	client, err := mongo.Connect(context.Background(), opts)
+	client, err := mongo.Connect(opts)
 
 	var result bson.M
 	if err := client.Database(databaseName).RunCommand(context.Background(), bson.D{{"ping", 1}}).Decode(&result); err != nil {
