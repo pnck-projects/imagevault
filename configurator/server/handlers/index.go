@@ -1,7 +1,7 @@
 package handlers
 
 import (
-	"github.com/pnck-projects/imagevault/internal"
+	"github.com/pnck-projects/imagevault/configurator/internal"
 	"net/http"
 )
 

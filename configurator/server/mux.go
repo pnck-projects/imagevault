@@ -1,9 +1,9 @@
 package server
 
 import (
+	internal2 "github.com/pnck-projects/imagevault/configurator/internal"
+	interceptors2 "github.com/pnck-projects/imagevault/configurator/server/interceptors"
 	"github.com/pnck-projects/imagevault/database"
-	"github.com/pnck-projects/imagevault/internal"
-	"github.com/pnck-projects/imagevault/server/interceptors"
 	"log"
 	"net/http"
 	"regexp"
@@ -12,8 +12,8 @@ import (
 
 type CustomMux struct {
 	defaultMux   *http.ServeMux
-	routes       []internal.Route
-	interceptors []internal.Interceptor
+	routes       []internal2.Route
+	interceptors []internal2.Interceptor
 	db           *database.MongoDB
 }
 
@@ -27,10 +27,10 @@ func (m *CustomMux) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		m.init()
 	}
 
-	cfg := internal.NewHandlerConfig(m.db)
+	cfg := internal2.NewHandlerConfig(m.db)
 
 	if r.Method == "OPTIONS" {
-		interceptors.StaticHeadersInterceptor.Before(w, r, nil)
+		interceptors2.StaticHeadersInterceptor.Before(w, r, nil)
 		w.WriteHeader(http.StatusOK)
 		return
 	}
@@ -47,7 +47,7 @@ func (m *CustomMux) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
 			if regex.MatchString(requestedPath) {
 				for _, i := range m.interceptors {
-					res := i.Before(w, r, internal.NewInterceptorConfig(m.db, &route, &cfg))
+					res := i.Before(w, r, internal2.NewInterceptorConfig(m.db, &route, &cfg))
 					if res.Done {
 						return
 					}
@@ -65,15 +65,15 @@ func (m *CustomMux) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	http.NotFound(w, r)
 }
 
-func (m *CustomMux) AddRoute(route internal.Route) {
+func (m *CustomMux) AddRoute(route internal2.Route) {
 	m.routes = append(m.routes, route)
 }
 
 func (m *CustomMux) init() {
 	m.defaultMux = http.NewServeMux()
 
-	m.interceptors = append(m.interceptors, interceptors.StaticHeadersInterceptor)
-	m.interceptors = append(m.interceptors, interceptors.AuthInterceptor)
-	m.interceptors = append(m.interceptors, interceptors.ParamsInterceptor)
+	m.interceptors = append(m.interceptors, interceptors2.StaticHeadersInterceptor)
+	m.interceptors = append(m.interceptors, interceptors2.AuthInterceptor)
+	m.interceptors = append(m.interceptors, interceptors2.ParamsInterceptor)
 
 }

@@ -1,15 +1,15 @@
 package interceptors
 
 import (
-	"github.com/pnck-projects/imagevault/internal"
+	internal2 "github.com/pnck-projects/imagevault/configurator/internal"
 	"net/http"
 )
 
 type staticHeadersInterceptor struct{}
 
-var StaticHeadersInterceptor internal.Interceptor = staticHeadersInterceptor{}
+var StaticHeadersInterceptor internal2.Interceptor = staticHeadersInterceptor{}
 
-func (i staticHeadersInterceptor) Before(w http.ResponseWriter, r *http.Request, cfg *internal.InterceptorConfig) internal.Result {
+func (i staticHeadersInterceptor) Before(w http.ResponseWriter, r *http.Request, cfg *internal2.InterceptorConfig) internal2.Result {
 	h := w.Header()
 
 	h.Set("Content-Type", "application/json")
@@ -20,5 +20,5 @@ func (i staticHeadersInterceptor) Before(w http.ResponseWriter, r *http.Request,
 	h.Set("X-Content-Type-Options", "nosniff")
 	h.Set("X-Frame-Options", "Deny")
 
-	return internal.NotDone()
+	return internal2.NotDone()
 }

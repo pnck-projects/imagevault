@@ -2,8 +2,8 @@ package main
 
 import (
 	"flag"
+	"github.com/pnck-projects/imagevault/configurator/server"
 	"github.com/pnck-projects/imagevault/database"
-	"github.com/pnck-projects/imagevault/server"
 	"log"
 	"net/http"
 	"os"

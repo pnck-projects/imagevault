@@ -1,0 +1,18 @@
+services:
+  registry:
+    restart: on-failure
+    image: registry:2
+    ports:
+      - 5010:5000
+    environment:
+      - REGISTRY_STORAGE_FILESYSTEM_ROOTDIRECTORY=/mnt/registry/data
+      - REGISTRY_AUTH=token
+      - REGISTRY_AUTH_TOKEN_REALM=https://localhost:5011/auth
+      - REGISTRY_AUTH_TOKEN_SERVICE=Authentication
+      - REGISTRY_AUTH_TOKEN_ISSUER=PNCK
+      - REGISTRY_AUTH_TOKEN_ROOTCERTBUNDLE=/mnt/certs/RootCA.crt
+      - REGISTRY_HTTP_TLS_CERTIFICATE=/mnt/certs/RootCA.crt
+      - REGISTRY_HTTP_TLS_KEY=/mnt/certs/RootCA.key
+    volumes:
+      - "${HOME}/git/registry_auth/data:/mnt/registry/data"
+      - "./certs:/mnt/certs"

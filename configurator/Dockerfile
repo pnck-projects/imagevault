@@ -1,6 +1,6 @@
 FROM golang:1.23-alpine AS build
 WORKDIR /src
-COPY . .
+COPY .. .
 RUN apk update &&  \
     apk upgrade &&  \
     apk add --no-cache ca-certificates && \

@@ -1,16 +1,16 @@
 package interceptors
 
 import (
-	"github.com/pnck-projects/imagevault/internal"
+	internal2 "github.com/pnck-projects/imagevault/configurator/internal"
 	"net/http"
 	"testing"
 )
 
 func Test_staticHeadersInterceptor_Before(t *testing.T) {
 	request, _ := http.NewRequest("GET", "/", nil)
-	testRoute := internal.NewRoute("/", "GET", internal.Public, nil)
-	handlerConfig := internal.HandlerConfig{}
-	interceptorConfig := internal.NewInterceptorConfig(nil, &testRoute, &handlerConfig)
+	testRoute := internal2.NewRoute("/", "GET", internal2.Public, nil)
+	handlerConfig := internal2.HandlerConfig{}
+	interceptorConfig := internal2.NewInterceptorConfig(nil, &testRoute, &handlerConfig)
 	responseWriter := MockResponseWriter{}
 	staticHeadersInterceptor{}.Before(&responseWriter, request, interceptorConfig)
 

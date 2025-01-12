@@ -1,16 +1,16 @@
 package interceptors
 
 import (
-	"github.com/pnck-projects/imagevault/internal"
+	internal2 "github.com/pnck-projects/imagevault/configurator/internal"
 	"net/http"
 	"regexp"
 )
 
 type paramsInterceptor struct{}
 
-var ParamsInterceptor internal.Interceptor = paramsInterceptor{}
+var ParamsInterceptor internal2.Interceptor = paramsInterceptor{}
 
-func (i paramsInterceptor) Before(w http.ResponseWriter, r *http.Request, cfg *internal.InterceptorConfig) internal.Result {
+func (i paramsInterceptor) Before(w http.ResponseWriter, r *http.Request, cfg *internal2.InterceptorConfig) internal2.Result {
 	regex, _ := regexp.Compile(cfg.GetRoute().GetPattern() + "$")
 	results := regex.FindStringSubmatch(r.URL.Path)
 	var params []string
@@ -20,5 +20,5 @@ func (i paramsInterceptor) Before(w http.ResponseWriter, r *http.Request, cfg *i
 		}
 	}
 	cfg.GetHandlerConfig().SetRouteParams(params)
-	return internal.NotDone()
+	return internal2.NotDone()
 }

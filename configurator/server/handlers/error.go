@@ -2,7 +2,7 @@ package handlers
 
 import (
 	"encoding/json"
-	"github.com/pnck-projects/imagevault/server/responses"
+	"github.com/pnck-projects/imagevault/configurator/server/responses"
 	"net/http"
 )
 

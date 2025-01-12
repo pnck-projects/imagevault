@@ -2,9 +2,8 @@ package handlers
 
 import (
 	"encoding/json"
-	"github.com/pnck-projects/imagevault/internal"
-	"github.com/pnck-projects/imagevault/server/models"
-
+	"github.com/pnck-projects/imagevault/configurator/internal"
+	"github.com/pnck-projects/imagevault/configurator/server/models"
 	"net/http"
 	"os"
 	"strings"

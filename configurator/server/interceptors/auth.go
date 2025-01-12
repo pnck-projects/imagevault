@@ -1,7 +1,7 @@
 package interceptors
 
 import (
-	"github.com/pnck-projects/imagevault/internal"
+	internal2 "github.com/pnck-projects/imagevault/configurator/internal"
 	"net/http"
 )
 
@@ -11,9 +11,9 @@ type authInterceptor struct {
 const Header = "X-API-KEY"
 const UnauthorizedText = "Unauthorized"
 
-var AuthInterceptor internal.Interceptor = authInterceptor{}
+var AuthInterceptor internal2.Interceptor = authInterceptor{}
 
-func (i authInterceptor) Before(w http.ResponseWriter, r *http.Request, cfg *internal.InterceptorConfig) internal.Result {
+func (i authInterceptor) Before(w http.ResponseWriter, r *http.Request, cfg *internal2.InterceptorConfig) internal2.Result {
 	/*if cfg.GetMinimalAuth() > internal.Public {
 		header := r.Header.Get(Header)
 		if header == "" {
@@ -34,5 +34,5 @@ func (i authInterceptor) Before(w http.ResponseWriter, r *http.Request, cfg *int
 		}
 	}*/
 
-	return internal.NotDone()
+	return internal2.NotDone()
 }

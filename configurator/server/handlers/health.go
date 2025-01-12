@@ -2,7 +2,7 @@ package handlers
 
 import (
 	"github.com/heptiolabs/healthcheck"
-	"github.com/pnck-projects/imagevault/internal"
+	"github.com/pnck-projects/imagevault/configurator/internal"
 	"net/http"
 	"time"
 )

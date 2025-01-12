@@ -3,7 +3,7 @@ package interceptors
 import (
 	"bytes"
 	"fmt"
-	"github.com/pnck-projects/imagevault/internal"
+	internal2 "github.com/pnck-projects/imagevault/configurator/internal"
 	"io"
 	"net/http"
 	"testing"
@@ -33,9 +33,9 @@ func (e *MockResponseWriter) WriteHeader(statusCode int) {
 
 func Test_paramsInterceptor_Before(t *testing.T) {
 	request, _ := http.NewRequest("GET", "/test/test123A/anothertest", nil)
-	testRoute := internal.NewRoute("/test/([a-z0-9A-Z]+)/([a-z]+)", "GET", internal.Public, nil)
-	handlerConfig := internal.HandlerConfig{}
-	interceptorConfig := internal.NewInterceptorConfig(nil, &testRoute, &handlerConfig)
+	testRoute := internal2.NewRoute("/test/([a-z0-9A-Z]+)/([a-z]+)", "GET", internal2.Public, nil)
+	handlerConfig := internal2.HandlerConfig{}
+	interceptorConfig := internal2.NewInterceptorConfig(nil, &testRoute, &handlerConfig)
 	responseWriter := MockResponseWriter{}
 	paramsInterceptor{}.Before(&responseWriter, request, interceptorConfig)
 
